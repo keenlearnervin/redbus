@@ -1,2 +1,2 @@
 # redbus
- Attemp at mimicing redbus bus booking service
+ Attempt at mimicing redbus bus booking service
