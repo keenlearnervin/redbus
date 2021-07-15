@@ -18,8 +18,6 @@ import java.util.UUID;
 public class Notification {
     @Column(name = "id")
     @Id
-//    @GeneratedValue(generator = "system-uuid")
-//    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     private final UUID id = UUID.randomUUID();
 

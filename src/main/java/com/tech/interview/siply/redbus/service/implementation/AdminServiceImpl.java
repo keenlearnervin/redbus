@@ -1,20 +1,25 @@
 package com.tech.interview.siply.redbus.service.implementation;
 
+import com.tech.interview.siply.redbus.configuration.RedbusUserDetails;
 import com.tech.interview.siply.redbus.entity.dao.users.Admin;
-import com.tech.interview.siply.redbus.entity.dao.users.Owner;
 import com.tech.interview.siply.redbus.entity.dto.AdminDTO;
 import com.tech.interview.siply.redbus.entity.dto.UserDTO;
 import com.tech.interview.siply.redbus.repository.contract.users.AdminRepository;
 import com.tech.interview.siply.redbus.service.contract.AdminService;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-public class AdminServiceImpl implements AdminService {
+@AllArgsConstructor
+public class AdminServiceImpl implements AdminService, UserDetailsService {
     final ModelMapper modelMapper = new ModelMapper();
 
-    @Autowired
     AdminRepository adminRepository;
 
     @Override
@@ -24,5 +29,11 @@ public class AdminServiceImpl implements AdminService {
         System.out.println();
         adminRepository.save(admin);
         return "Saved Admin";
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        Optional<Admin> adminUser = adminRepository.findByUserName(userName);
+        return new RedbusUserDetails(adminUser.orElseThrow(() -> new UsernameNotFoundException("Admin User Not found.")));
     }
 }

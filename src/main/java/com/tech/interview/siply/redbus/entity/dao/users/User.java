@@ -1,6 +1,7 @@
 package com.tech.interview.siply.redbus.entity.dao.users;
 
 import com.tech.interview.siply.redbus.constant.Gender;
+import com.tech.interview.siply.redbus.constant.UserType;
 import com.tech.interview.siply.redbus.entity.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,6 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     public UUID id = UUID.randomUUID();
 
@@ -54,6 +54,17 @@ public class User {
     public String emailAddress;
     @Column(name = "dob")
     public Date dateOfBirth;
+    @Column(name = "user_name")
+    public String userName;
+    @Column(name = "password")
+    public String password;
+    @Column(name = "verify_question")
+    public String verifyQuestion;
+    @Column(name = "verify_answer")
+    public String verifyAnswer;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_type")
+    public UserType userType;
 
     @Column(name = "created_at", nullable = true, updatable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
     @CreationTimestamp
@@ -68,20 +79,38 @@ public class User {
     @Column(name = "notification_id")
     public UUID notificationId;
 
-    public User(UserDTO acc) {
-        this.address1 = acc.getAddress1();
-        this.age = acc.getAge();
-        this.country = acc.getCountry();
-        this.address2 = acc.getAddress2();
-        this.city = acc.getCity();
-        this.emailAddress = acc.getEmailAddress();
-        this.firstName = acc.getFirstName();
-        this.lastName = acc.getLastName();
-        this.middleName = acc.getMiddleName();
-        this.gender = acc.getGender();
-        this.phoneNo = acc.getPhoneNo();
-        this.preferredName = acc.getPreferredName();
-        this.dateOfBirth = acc.getDateOfBirth();
-        this.pincode = acc.getPincode();
+
+    @Column(name = "locked")
+    public Boolean isLocked = Boolean.FALSE;
+
+    @Column(name = "enabled")
+    public Boolean isEnabled = Boolean.TRUE;
+
+    @Column(name = "credential_expired")
+    public Boolean isCredExpired = Boolean.FALSE;
+
+    @Column(name = "account_expired")
+    public Boolean isAccExpired = Boolean.FALSE;
+
+    public User(UserDTO userDTO) {
+        this.address1 = userDTO.getAddress1();
+        this.age = userDTO.getAge();
+        this.country = userDTO.getCountry();
+        this.address2 = userDTO.getAddress2();
+        this.city = userDTO.getCity();
+        this.emailAddress = userDTO.getEmailAddress();
+        this.firstName = userDTO.getFirstName();
+        this.lastName = userDTO.getLastName();
+        this.middleName = userDTO.getMiddleName();
+        this.gender = userDTO.getGender();
+        this.phoneNo = userDTO.getPhoneNo();
+        this.preferredName = userDTO.getPreferredName();
+        this.dateOfBirth = userDTO.getDateOfBirth();
+        this.pincode = userDTO.getPincode();
+        this.userName = userDTO.getUserName();
+        this.password = userDTO.getPassword();
+        this.verifyQuestion = userDTO.getVerifyQuestion();
+        this.verifyAnswer = userDTO.getVerifyAnswer();
+        this.userType = userDTO.getUserType();
     }
 }

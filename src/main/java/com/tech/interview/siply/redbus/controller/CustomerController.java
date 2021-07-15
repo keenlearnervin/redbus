@@ -3,13 +3,13 @@ package com.tech.interview.siply.redbus.controller;
 import com.tech.interview.siply.redbus.entity.dto.CustomerDTO;
 import com.tech.interview.siply.redbus.service.contract.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller layer for CUSTOMER users
+ */
 @RestController
-@RequestMapping("api/v1/user/customer")
+@RequestMapping("/api/user/customer")
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
@@ -18,5 +18,11 @@ public class CustomerController {
     public String addNewCustomer(@RequestBody CustomerDTO customerDTO) {
         System.out.println("In Customer Controller - POST");
         return customerService.addCustomer(customerDTO);
+    }
+
+
+    @GetMapping
+    public String getCustomer() {
+        return "This is the CUSTOMER";
     }
 }

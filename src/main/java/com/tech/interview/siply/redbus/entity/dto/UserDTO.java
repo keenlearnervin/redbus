@@ -2,16 +2,17 @@ package com.tech.interview.siply.redbus.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tech.interview.siply.redbus.constant.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.tech.interview.siply.redbus.constant.UserType;
+import lombok.*;
 
+import javax.persistence.Column;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class UserDTO {
     private String firstName;
     private String middleName;
@@ -27,4 +28,13 @@ public class UserDTO {
     private String phoneNo;
     private String emailAddress;
     private Date dateOfBirth;
+    public String userName;
+    public String password;
+    public String verifyQuestion;
+    public String verifyAnswer;
+    public UserType userType;
+    public Boolean isLocked;
+    public Boolean isEnabled;
+    public Boolean isCredExpired;
+    public Boolean isAccExpired;
 }

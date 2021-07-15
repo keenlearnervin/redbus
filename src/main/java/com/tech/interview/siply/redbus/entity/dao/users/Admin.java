@@ -2,7 +2,6 @@ package com.tech.interview.siply.redbus.entity.dao.users;
 
 import com.tech.interview.siply.redbus.constant.Status;
 import com.tech.interview.siply.redbus.entity.dto.AdminDTO;
-import com.tech.interview.siply.redbus.entity.dto.OwnerDTO;
 import com.tech.interview.siply.redbus.entity.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Admin extends User implements Serializable {
-    @Column(name = "status",nullable = false)
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
 
