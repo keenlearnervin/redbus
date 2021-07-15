@@ -2,6 +2,7 @@ package com.tech.interview.siply.redbus.configuration;
 
 import com.tech.interview.siply.redbus.entity.dao.users.User;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

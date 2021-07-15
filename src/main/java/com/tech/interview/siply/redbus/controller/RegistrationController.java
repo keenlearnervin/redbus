@@ -31,10 +31,10 @@ public class RegistrationController {
 
     @PostMapping
     public String registerUser(@RequestBody RegistrationDTO registrationDTO) throws IOException {
-//        String encodedPassword = encoder.encode(registrationDTO.getPassword());
-//        String encodedAnswer = encoder.encode(registrationDTO.getVerifyAnswer());
-//        registrationDTO.setPassword(encodedPassword);
-//        registrationDTO.setVerifyAnswer(encodedAnswer);
+        String encodedPassword = encoder.encode(registrationDTO.getPassword());
+        String encodedAnswer = encoder.encode(registrationDTO.getVerifyAnswer());
+        registrationDTO.setPassword(encodedPassword);
+        registrationDTO.setVerifyAnswer(encodedAnswer);
         switch (registrationDTO.getUserType()) {
             case USER:
                 customerService.addCustomer(new ModelMapper().map(registrationDTO, CustomerDTO.class));

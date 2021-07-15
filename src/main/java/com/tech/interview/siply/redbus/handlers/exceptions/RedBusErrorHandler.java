@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.LocalDateTime;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
-@ControllerAdvice(basePackages = {"com.tech.interview.siply.redbus"})
+//@ControllerAdvice(basePackages = {"com.tech.interview.siply.redbus"})
 public class RedBusErrorHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {RedBusException.class})
     public ResponseEntity<Object> handleApiRequestException(RedBusException redBusException) {
