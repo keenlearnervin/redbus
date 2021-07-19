@@ -8,6 +8,8 @@ import com.tech.interview.siply.redbus.repository.contract.users.OwnerRepository
 import com.tech.interview.siply.redbus.service.contract.OwnerService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,7 +37,8 @@ public class OwnerServiceImpl implements OwnerService, UserDetailsService {
 
     @Override
     public List<OwnerDTO> getAllOwnerUsers() {
-        return ownerRepository.findAll().stream().map(owner ->
+        Pageable pageable = PageRequest.of(0,10);
+        return ownerRepository.findAll(pageable).stream().map(owner ->
                 modelMapper.map(owner, OwnerDTO.class)
         ).collect(Collectors.toList());
     }
@@ -47,8 +50,7 @@ public class OwnerServiceImpl implements OwnerService, UserDetailsService {
 
     @Override
     public OwnerDTO getOwnerById(UUID id) {
-        OwnerDTO ownerDTO = modelMapper.map(ownerRepository.findById(id).get(), OwnerDTO.class);
-        return ownerDTO;
+        return modelMapper.map(ownerRepository.findById(id).get(), OwnerDTO.class);
     }
 
     @Override

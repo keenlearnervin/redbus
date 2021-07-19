@@ -41,7 +41,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .hasAuthority(UserType.DRIVER.name())
                 .antMatchers("/api/user/admin/**")
                 .hasAuthority(UserType.ADMIN.name())
-                .antMatchers("/api/newuser/registration")
+                .antMatchers("/**", "/api/newuser/registration")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

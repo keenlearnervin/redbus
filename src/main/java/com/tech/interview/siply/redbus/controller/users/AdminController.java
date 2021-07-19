@@ -19,7 +19,6 @@ public class AdminController {
 
     @PostMapping
     public String addNewAdmin(@RequestBody AdminDTO adminDTO) {
-        System.out.println("In Admin Controller - POST");
         return adminService.addAdmin(adminDTO);
     }
 
@@ -29,7 +28,7 @@ public class AdminController {
         return adminService.getAdminById(id);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<AdminDTO> getAllAdmins() {
         return adminService.getAllAdminUsers();
     }

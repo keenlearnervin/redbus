@@ -8,6 +8,8 @@ import com.tech.interview.siply.redbus.repository.contract.users.DriverRepositor
 import com.tech.interview.siply.redbus.service.contract.DriverService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,13 +42,13 @@ public class DriverServiceImpl implements DriverService, UserDetailsService {
 
     @Override
     public DriverDTO getDriverById(UUID id) {
-        DriverDTO driverDTO = modelMapper.map(driverRepository.findById(id).get(), DriverDTO.class);
-        return driverDTO;
+        return modelMapper.map(driverRepository.findById(id).get(), DriverDTO.class);
     }
 
     @Override
     public List<DriverDTO> getAllDriverUsers() {
-        return driverRepository.findAll().stream().map(driver ->
+        Pageable pageable = PageRequest.of(0,10);
+        return driverRepository.findAll(pageable).stream().map(driver ->
                 modelMapper.map(driver, DriverDTO.class)
         ).collect(Collectors.toList());
     }

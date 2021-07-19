@@ -19,11 +19,10 @@ public class CustomerController {
 
     @PostMapping
     public String addNewCustomer(@RequestBody CustomerDTO customerDTO) {
-        System.out.println("In Customer Controller - POST");
         return customerService.addCustomer(customerDTO);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<CustomerDTO> getAllCustomers() {
         return customerService.getAllCustomersUsers();
     }

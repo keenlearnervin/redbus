@@ -8,6 +8,8 @@ import com.tech.interview.siply.redbus.repository.contract.users.CustomerReposit
 import com.tech.interview.siply.redbus.service.contract.CustomerService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,7 +28,6 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
     @Override
     public String addCustomer(CustomerDTO customerDTO) {
-
         UserDTO userDTO = modelMapper.map(customerDTO, UserDTO.class);
         Customer customer = new Customer(userDTO, customerDTO);
         customerRepository.save(customer);
@@ -40,13 +41,13 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
 
     @Override
     public CustomerDTO getCustomerById(UUID id) {
-        CustomerDTO customerDTO = modelMapper.map(customerRepository.findById(id).get(), CustomerDTO.class);
-        return customerDTO;
+        return modelMapper.map(customerRepository.findById(id).get(), CustomerDTO.class);
     }
 
     @Override
     public List<CustomerDTO> getAllCustomersUsers() {
-        return customerRepository.findAll().stream().map(customer ->
+        Pageable pageable = PageRequest.of(0,10);
+        return customerRepository.findAll(pageable).stream().map(customer ->
                 modelMapper.map(customer, CustomerDTO.class)
         ).collect(Collectors.toList());
     }

@@ -19,11 +19,10 @@ public class DriverController {
 
     @PostMapping
     public String addNewDriver(@RequestBody DriverDTO driverDTO) {
-        System.out.println("In Driver Controller - POST");
         return driverService.addDriver(driverDTO);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<DriverDTO> getAllDrivers() {
         return driverService.getAllDriverUsers();
     }

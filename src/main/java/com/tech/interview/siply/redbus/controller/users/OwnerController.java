@@ -19,11 +19,10 @@ public class OwnerController {
 
     @PostMapping
     public String addNewOwner(@RequestBody OwnerDTO ownerDTO) {
-        System.out.println("In Owner Controller - POST");
         return ownerService.addOwner(ownerDTO);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<OwnerDTO> getAllOwners() {
         return ownerService.getAllOwnerUsers();
     }

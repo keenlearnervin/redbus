@@ -8,6 +8,8 @@ import com.tech.interview.siply.redbus.repository.contract.users.AdminRepository
 import com.tech.interview.siply.redbus.service.contract.AdminService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -41,14 +43,13 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
     @Override
     public AdminDTO getAdminById(UUID id) {
         Admin admin = adminRepository.findById(id).get();
-        AdminDTO adminDTO = modelMapper.map(adminRepository.findById(id).get(), AdminDTO.class);
-
-        return adminDTO;
+        return modelMapper.map(adminRepository.findById(id).get(), AdminDTO.class);
     }
 
     @Override
     public List<AdminDTO> getAllAdminUsers() {
-        return adminRepository.findAll().stream().map(admin ->
+        Pageable pageable = PageRequest.of(0,10);
+        return adminRepository.findAll(pageable).stream().map(admin ->
                 modelMapper.map(admin, AdminDTO.class)
         ).collect(Collectors.toList());
     }
