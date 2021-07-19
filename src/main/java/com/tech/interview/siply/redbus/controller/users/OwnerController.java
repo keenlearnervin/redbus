@@ -1,9 +1,12 @@
-package com.tech.interview.siply.redbus.controller;
+package com.tech.interview.siply.redbus.controller.users;
 
 import com.tech.interview.siply.redbus.entity.dto.OwnerDTO;
 import com.tech.interview.siply.redbus.service.contract.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Controller layer for OWNER users
@@ -21,7 +24,12 @@ public class OwnerController {
     }
 
     @GetMapping
-    public String getOwner() {
+    public List<OwnerDTO> getAllOwners() {
+        return ownerService.getAllOwnerUsers();
+    }
+
+    @GetMapping("/{ownerId}")
+    public String getOwner(@PathVariable UUID ownerId) {
         return "This is the OWNER";
     }
 }

@@ -10,4 +10,7 @@ import java.util.UUID;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, UUID> {
     Optional<Admin> findByUserName(String userName);
+
+    @Override
+    void deleteById(UUID uuid);
 }

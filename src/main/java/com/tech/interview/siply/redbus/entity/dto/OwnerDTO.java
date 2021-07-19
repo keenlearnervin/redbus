@@ -3,7 +3,6 @@ package com.tech.interview.siply.redbus.entity.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tech.interview.siply.redbus.constant.Gender;
 import com.tech.interview.siply.redbus.constant.Status;
-import com.tech.interview.siply.redbus.constant.Type;
 import com.tech.interview.siply.redbus.constant.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,10 +15,16 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class OwnerDTO {
+    //    public String verifyQuestion;
+//    public String verifyAnswer;
+    public UserType userType;
+    public Boolean isLocked;
+    public Boolean isEnabled;
+    public Boolean isCredExpired;
+    public Boolean isAccExpired;
     private Integer noOfBuses;
     private String agencyName;
     private Status status;
-
     private String firstName;
     private String middleName;
     private String lastName;
@@ -34,13 +39,6 @@ public class OwnerDTO {
     private String phoneNo;
     private String emailAddress;
     private Date dateOfBirth;
-    public String verifyQuestion;
-    public String verifyAnswer;
-    public UserType userType;
-    public Boolean isLocked;
-    public Boolean isEnabled;
-    public Boolean isCredExpired;
-    public Boolean isAccExpired;
-    private String userName;
-    private String password;
+//    private String userName;
+//    private String password;
 }

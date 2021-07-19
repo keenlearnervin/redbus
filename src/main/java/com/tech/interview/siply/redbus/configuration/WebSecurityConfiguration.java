@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.NullSecurityContextRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -34,18 +35,20 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().httpBasic().disable().
                 authorizeRequests()
+                .antMatchers("/api/user/owner/**")
+                .hasAuthority(UserType.OWNER.name())
+                .antMatchers("/api/user/driver/**")
+                .hasAuthority(UserType.DRIVER.name())
+                .antMatchers("/api/user/admin/**")
+                .hasAuthority(UserType.ADMIN.name())
                 .antMatchers("/api/newuser/registration")
                 .permitAll()
-                .antMatchers("/api/user/owner")
-                .hasAuthority(UserType.OWNER.name())
-                .antMatchers("/api/user/driver")
-                .hasAuthority(UserType.DRIVER.name())
-                .antMatchers("/api/user/admin")
-                .hasAuthority(UserType.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic();
+
+        http.securityContext().securityContextRepository(new NullSecurityContextRepository());
     }
 
     @Bean

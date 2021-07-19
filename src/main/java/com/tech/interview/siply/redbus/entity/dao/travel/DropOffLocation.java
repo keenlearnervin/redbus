@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "tbl_drop_locations")
-public class DropLocation {
+@Table(name = "tbl_drop_off_locations")
+public class DropOffLocation {
     @Column(name = "created_at", nullable = true, updatable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

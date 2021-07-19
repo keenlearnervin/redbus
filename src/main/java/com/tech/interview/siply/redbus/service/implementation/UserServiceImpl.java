@@ -1,7 +1,6 @@
 package com.tech.interview.siply.redbus.service.implementation;
 
 import com.tech.interview.siply.redbus.configuration.RedbusUserDetails;
-import com.tech.interview.siply.redbus.entity.dao.users.Owner;
 import com.tech.interview.siply.redbus.entity.dao.users.User;
 import com.tech.interview.siply.redbus.entity.dto.UserDTO;
 import com.tech.interview.siply.redbus.repository.contract.users.UserRepository;

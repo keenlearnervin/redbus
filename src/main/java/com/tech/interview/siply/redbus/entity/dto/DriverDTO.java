@@ -17,8 +17,8 @@ import java.util.Date;
 @Getter
 @Setter
 public class DriverDTO {
-    public String verifyQuestion;
-    public String verifyAnswer;
+    //    public String verifyQuestion;
+//    public String verifyAnswer;
     public UserType userType;
     public Boolean isLocked;
     public Boolean isEnabled;
@@ -40,6 +40,6 @@ public class DriverDTO {
     private String phoneNo;
     private String emailAddress;
     private Date dateOfBirth;
-    private String userName;
-    private String password;
+//    private String userName;
+//    private String password;
 }

@@ -1,9 +1,12 @@
-package com.tech.interview.siply.redbus.controller;
+package com.tech.interview.siply.redbus.controller.users;
 
 import com.tech.interview.siply.redbus.entity.dto.AdminDTO;
 import com.tech.interview.siply.redbus.service.contract.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Controller layer for ADMIN users
@@ -21,8 +24,18 @@ public class AdminController {
     }
 
 
+    @GetMapping("/{id}")
+    public AdminDTO getAdmin(@PathVariable UUID id) {
+        return adminService.getAdminById(id);
+    }
+
     @GetMapping
-    public String getAdmin() {
-        return "This is the ADMIN";
+    public List<AdminDTO> getAllAdmins() {
+        return adminService.getAllAdminUsers();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAdmin(@PathVariable UUID id) {
+        adminService.deleteAdminUser(id);
     }
 }

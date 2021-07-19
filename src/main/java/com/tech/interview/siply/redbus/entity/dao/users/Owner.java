@@ -4,6 +4,7 @@ import com.tech.interview.siply.redbus.constant.Status;
 import com.tech.interview.siply.redbus.entity.dto.OwnerDTO;
 import com.tech.interview.siply.redbus.entity.dto.UserDTO;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Table(name = "tbl_owners")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Owner extends User implements Serializable {
     @Column(name = "no_of_buses", nullable = false)
     private Integer noOfBuses;

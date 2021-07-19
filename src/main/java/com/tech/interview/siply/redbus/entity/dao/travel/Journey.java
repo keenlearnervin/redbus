@@ -27,8 +27,10 @@ public class Journey {
     private UUID busId;
     @Column(name = "driver_id")
     private UUID driverId;
+    /*
     @Column(name = "route_id")
     private UUID routeId;
+     */
     @Column(name = "available_capacity")
     private Integer availableSeats;
     @Column(name = "expected_departure", columnDefinition = "TIME")
@@ -43,11 +45,15 @@ public class Journey {
     @Column(name = "cancellations")
     private Integer totalCancellations;
     @Column(name = "status")
-    private BookingStatus bookingStatus;*/
+    private BookingStatus bookingStatus;
+    */
+
+    @OneToMany(targetEntity = Route.class, mappedBy = "journey")
+    private Set<Route> routes;
     @OneToMany(targetEntity = PickUpLocation.class, mappedBy = "journey")
-    private Set<PickUpLocation> pickUpLocationList;
-    @OneToMany(targetEntity = DropLocation.class, mappedBy = "journey")
-    private Set<DropLocation> dropLocationList;
+    private Set<PickUpLocation> pickUpLocations;
+    @OneToMany(targetEntity = DropOffLocation.class, mappedBy = "journey")
+    private Set<DropOffLocation> dropOffLocations;
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp

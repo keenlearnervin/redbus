@@ -13,7 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -26,9 +29,26 @@ public class OwnerServiceImpl implements OwnerService, UserDetailsService {
     public String addOwner(OwnerDTO ownerDTO) {
         UserDTO userDTO = modelMapper.map(ownerDTO, UserDTO.class);
         Owner owner = new Owner(userDTO, ownerDTO);
-        System.out.println();
         ownerRepository.save(owner);
         return "Saved Owner";
+    }
+
+    @Override
+    public List<OwnerDTO> getAllOwnerUsers() {
+        return ownerRepository.findAll().stream().map(owner ->
+                modelMapper.map(owner, OwnerDTO.class)
+        ).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteOwnerUser(UUID id) {
+        ownerRepository.deleteById(id);
+    }
+
+    @Override
+    public OwnerDTO getOwnerById(UUID id) {
+        OwnerDTO ownerDTO = modelMapper.map(ownerRepository.findById(id).get(), OwnerDTO.class);
+        return ownerDTO;
     }
 
     @Override

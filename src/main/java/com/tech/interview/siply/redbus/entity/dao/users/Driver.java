@@ -4,6 +4,7 @@ import com.tech.interview.siply.redbus.constant.Status;
 import com.tech.interview.siply.redbus.entity.dto.DriverDTO;
 import com.tech.interview.siply.redbus.entity.dto.UserDTO;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 @Table(name = "tbl_drivers")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Driver extends User implements Serializable {
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)

@@ -13,7 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,6 +31,24 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         Customer customer = new Customer(userDTO, customerDTO);
         customerRepository.save(customer);
         return "Saved Customer";
+    }
+
+    @Override
+    public void deleteCustomerUser(UUID id) {
+        customerRepository.deleteById(id);
+    }
+
+    @Override
+    public CustomerDTO getCustomerById(UUID id) {
+        CustomerDTO customerDTO = modelMapper.map(customerRepository.findById(id).get(), CustomerDTO.class);
+        return customerDTO;
+    }
+
+    @Override
+    public List<CustomerDTO> getAllCustomersUsers() {
+        return customerRepository.findAll().stream().map(customer ->
+                modelMapper.map(customer, CustomerDTO.class)
+        ).collect(Collectors.toList());
     }
 
     @Override

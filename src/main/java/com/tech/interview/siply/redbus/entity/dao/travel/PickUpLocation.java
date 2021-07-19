@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "tbl_drop_locations")
+@Table(name = "tbl_pick_up_locations")
 public class PickUpLocation {
     @Column(name = "created_at", nullable = true, updatable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
     @CreationTimestamp

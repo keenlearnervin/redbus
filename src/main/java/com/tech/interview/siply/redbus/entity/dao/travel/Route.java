@@ -21,8 +21,10 @@ public class Route {
     @Id
     @Column(name = "id")
     private UUID id;
+    /*
     @Column(name = "journey_id")
     private UUID journeyId;
+    */
     @Column(name = "source")
     private String srcLoc;
     @Column(name = "destination")
@@ -35,4 +37,7 @@ public class Route {
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Date createdAt;
+    @ManyToOne
+    @JoinColumn(name = "journey_id", nullable = false)
+    private Journey journey;
 }

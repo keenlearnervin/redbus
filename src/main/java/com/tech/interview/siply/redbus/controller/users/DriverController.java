@@ -1,9 +1,12 @@
-package com.tech.interview.siply.redbus.controller;
+package com.tech.interview.siply.redbus.controller.users;
 
 import com.tech.interview.siply.redbus.entity.dto.DriverDTO;
 import com.tech.interview.siply.redbus.service.contract.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Controller layer for DRIVER users
@@ -20,9 +23,14 @@ public class DriverController {
         return driverService.addDriver(driverDTO);
     }
 
-
     @GetMapping
-    public String getDriver() {
+    public List<DriverDTO> getAllDrivers() {
+        return driverService.getAllDriverUsers();
+    }
+
+
+    @GetMapping("/{driverId}")
+    public String getDriver(@PathVariable UUID driverId) {
         return "This is the Driver";
     }
 }

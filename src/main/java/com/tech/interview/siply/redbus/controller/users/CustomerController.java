@@ -1,9 +1,12 @@
-package com.tech.interview.siply.redbus.controller;
+package com.tech.interview.siply.redbus.controller.users;
 
 import com.tech.interview.siply.redbus.entity.dto.CustomerDTO;
 import com.tech.interview.siply.redbus.service.contract.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Controller layer for CUSTOMER users
@@ -20,9 +23,14 @@ public class CustomerController {
         return customerService.addCustomer(customerDTO);
     }
 
-
     @GetMapping
-    public String getCustomer() {
+    public List<CustomerDTO> getAllCustomers() {
+        return customerService.getAllCustomersUsers();
+    }
+
+
+    @GetMapping("/{custId}")
+    public String getCustomer(@PathVariable UUID custId) {
         return "This is the CUSTOMER";
     }
 }

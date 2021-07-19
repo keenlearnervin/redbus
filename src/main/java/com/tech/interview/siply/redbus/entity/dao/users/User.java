@@ -1,16 +1,18 @@
 package com.tech.interview.siply.redbus.entity.dao.users;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tech.interview.siply.redbus.constant.Gender;
 import com.tech.interview.siply.redbus.constant.UserType;
 import com.tech.interview.siply.redbus.entity.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -20,7 +22,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User {
+@OnDelete(action = OnDeleteAction.CASCADE)
+public class User implements Serializable {
     @Id
     @Type(type = "org.hibernate.type.PostgresUUIDType")
     public UUID id = UUID.randomUUID();
@@ -53,6 +56,8 @@ public class User {
     @Column(name = "email_addr")
     public String emailAddress;
     @Column(name = "dob")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     public Date dateOfBirth;
     @Column(name = "user_name")
     public String userName;

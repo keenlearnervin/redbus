@@ -13,7 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -26,9 +29,28 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
     public String addAdmin(AdminDTO adminDTO) {
         UserDTO userDTO = modelMapper.map(adminDTO, UserDTO.class);
         Admin admin = new Admin(userDTO, adminDTO);
-        System.out.println();
         adminRepository.save(admin);
         return "Saved Admin";
+    }
+
+    @Override
+    public void deleteAdminUser(UUID id) {
+        adminRepository.deleteById(id);
+    }
+
+    @Override
+    public AdminDTO getAdminById(UUID id) {
+        Admin admin = adminRepository.findById(id).get();
+        AdminDTO adminDTO = modelMapper.map(adminRepository.findById(id).get(), AdminDTO.class);
+
+        return adminDTO;
+    }
+
+    @Override
+    public List<AdminDTO> getAllAdminUsers() {
+        return adminRepository.findAll().stream().map(admin ->
+                modelMapper.map(admin, AdminDTO.class)
+        ).collect(Collectors.toList());
     }
 
     @Override

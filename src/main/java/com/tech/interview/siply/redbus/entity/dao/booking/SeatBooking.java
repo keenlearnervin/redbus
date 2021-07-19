@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -27,7 +26,7 @@ public class SeatBooking {
     @Column(name = "price")
     private int seatPrice;
 
-    @Column(name = "status",nullable = false)
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus;
 

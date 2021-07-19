@@ -1,4 +1,4 @@
-package com.tech.interview.siply.redbus.controller;
+package com.tech.interview.siply.redbus.controller.users;
 
 import com.tech.interview.siply.redbus.entity.dto.*;
 import com.tech.interview.siply.redbus.service.contract.AdminService;

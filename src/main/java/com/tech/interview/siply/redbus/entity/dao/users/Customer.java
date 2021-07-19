@@ -5,16 +5,19 @@ import com.tech.interview.siply.redbus.constant.Type;
 import com.tech.interview.siply.redbus.entity.dto.CustomerDTO;
 import com.tech.interview.siply.redbus.entity.dto.UserDTO;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
 @Table(name = "tbl_customers")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer extends User {
+@Getter
+public class Customer extends User implements Serializable {
     @Column(name = "subs_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private Type type;

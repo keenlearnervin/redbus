@@ -9,16 +9,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class CustomerDTO {
+    //    public String verifyQuestion;
+//    public String verifyAnswer;
+    public UserType userType;
+    public Boolean isLocked;
+    public Boolean isEnabled;
+    public Boolean isCredExpired;
+    public Boolean isAccExpired;
     private Type type;
     private Status status;
-
     private String firstName;
     private String middleName;
     private String lastName;
@@ -32,15 +36,7 @@ public class CustomerDTO {
     private String pincode;
     private String phoneNo;
     private String emailAddress;
-
-    public String verifyQuestion;
-    public String verifyAnswer;
-    public UserType userType;
-    public Boolean isLocked;
-    public Boolean isEnabled;
-    public Boolean isCredExpired;
-    public Boolean isAccExpired;
-    private String userName;
-    private String password;
+//    private String userName;
+//    private String password;
 
 }
